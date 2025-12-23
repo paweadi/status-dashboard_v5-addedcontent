@@ -6,7 +6,7 @@
   <title>Status Dashboard – Markel Services</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    /* === Theme (self-contained; no external CSS) === */
+    /* === Theme (self-contained) === */
     :root {
       --bg:#0b1220; --fg:#e6eefc; --muted:#9aa6bd; --card:#0f172a;
       --row: rgba(255,255,255,.06); --border: rgba(255,255,255,.08);
@@ -67,7 +67,6 @@
 </head>
 <body>
   <h1>Status Dashboard – Markel Services</h1>
-  <h2>Markel Services</h2>
   <p class="meta">Auto-refresh: 60s • Last updated: <span id="lastUpdated">—</span></p>
 
   <!-- Table rendered from status.json -->
@@ -78,27 +77,12 @@
         <th>Status</th>
         <th>Description</th>
         <th>Source</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr id="Azure"><td>Azure</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">Azure Status</td><td><a href="https://azure.status.microsoft/en-us/status" target="_blank">Azure</a></td></tr>
-        <tr id="Azure_DevOps"><td>Azure DevOps</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">Everything is looking good</td><td><a href="https://status.dev.azure.com/" target="_blank">Azure DevOps</a></td></tr>
-        <tr id="Azure_Databricks"><td>Azure Databricks</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.azuredatabricks.net/" target="_blank">Azure Databricks</a></td></tr>
-        <tr id="JFrog"><td>JFrog</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.jfrog.io/" target="_blank">JFrog</a></td></tr>
-        <tr id="Elastic"><td>Elastic</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.elastic.co/" target="_blank">Elastic</a></td></tr>
-        <tr id="Octopus_Deploy"><td>Octopus Deploy</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.octopus.com/" target="_blank">Octopus Deploy</a></td></tr>
-        <tr id="Lucid"><td>Lucid</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.lucid.co/" target="_blank">Lucid</a></td></tr>
-        <tr id="Jira"><td>Jira</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://jira-software.status.atlassian.com/" target="_blank">Jira</a></td></tr>
-        <tr id="Confluence"><td>Confluence</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://confluence.status.atlassian.com/" target="_blank">Confluence</a></td></tr>
-        <tr id="GitHub"><td>GitHub</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://www.githubstatus.com/" target="_blank">GitHub</a></td></tr>
-        <tr id="CucumberStudio"><td>CucumberStudio</td><td class="status"><span class="badge Unknown">Unknown</span></td><td class="description">Unknown</td><td><a href="https://status.cucumberstudio.com/" target="_blank">CucumberStudio</a></td></tr>
-        <tr id="Fivetran"><td>Fivetran</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.fivetran.com/" target="_blank">Fivetran</a></td></tr>
-        <tr id="Brainboard"><td>Brainboard</td><td class="status"><span class="badge Minor">Minor</span></td><td class="description">Maintenance</td><td><a href="https://status.brainboard.co/" target="_blank">Brainboard</a></td></tr>
-        <tr id="Port"><td>Port</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.port.io/" target="_blank">Port</a></td></tr>
-      </tbody>
-    </table>
-    <p id="error" class="error" style="display:none;"></p>
-  </div>
+      </tr>
+    </thead>
+    <tbody><!-- rows inserted by JS --></tbody>
+  </table>
+
+  <div class="section-divider" role="presentation"></div>
 
   <!-- Contact Service Management -->
   <section id="contact-sm" class="contact-card" aria-labelledby="csm-title">
@@ -106,7 +90,7 @@
       <div class="contact-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="22" height="22" role="img" focusable="false" aria-hidden="true">
           <circle cx="12" cy="12" r="12" fill="var(--accent)"></circle>
-          <path d="M16.54 15.3l-1.28 1.28a2 2 0 0 1-2.23.43c-1.2-.5-2.8-1.7-4.19-3.09S6.25 11.1 5.76 9.9a2 2 0 0 1 .43-2.23L7.47 6.4a.8.8 0 0 1 1.15.07l1.2 1.48a1 1 0 0 1-.1 1.35l-.7.7c.47.87 1.26 1.86 2.24 2.84s1.97 1.77 2.84 2.24l.7-.7a1 1 0 0 1 1.35-.1l1.48 1.2a.8.8 0 0 1 .07 1.15z" fill="#fff"></path>
+          <path d="M16.54 15.3l-1.28 1.28a2 2 0 0 1-2.23.43c-1.2-.5-2.8-1.7-4.19-3.09S6.25 11.1 5.76 9.9a2 2 0 0 1 .43-2.23L7.47 6.4a.8.8 0 0 1 1.15.07l1.2 1.48a1 1 0 0 1-.1 1.35l-.7.7c.47.87 1.26 1.86 2.24 2.84s1.97 1.77 2.84 2.24l.7-.7a 1 1 0 0 1 1.35-.1l1.48 1.2a.8.8 0 0 1 .07 1.15z" fill="#fff"></path>
         </svg>
       </div>
       <h2 id="csm-title">Contact Service Management</h2>
@@ -138,7 +122,6 @@
 
   <script>
     const REFRESH_MS = 60000;
-    const STATUS_JSON_URL = 'status.json?v=' + Date.now();
     const severityOrder = { Major: 0, Minor: 1, Operational: 2, Unknown: 3 };
 
     function badgeFor(status) {
@@ -153,7 +136,7 @@
       return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
     }
 
-    // ✅ Correct hyperlink generator
+    /** ✅ Proper hyperlink generator with href/target/rel */
     function linkHTML(url, text){
       if(!url) return '';
       const href = String(url);
