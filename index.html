@@ -6,6 +6,7 @@
   <title>Status Dashboard – Markel Services</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
+    /* === Theme (self-contained; no external CSS) === */
     :root {
       --bg:#0b1220; --fg:#e6eefc; --muted:#9aa6bd; --card:#0f172a;
       --row: rgba(255,255,255,.06); --border: rgba(255,255,255,.08);
@@ -17,22 +18,27 @@
     h1,h2 { margin:0 0 10px; }
     .meta { color:var(--muted); margin:6px 0 16px; }
 
+    /* Table */
     table { width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; }
     thead th { text-align:left; padding:12px 14px; color:var(--muted); border-bottom:1px solid var(--row); }
     tbody td { padding:12px 14px; border-bottom:1px solid var(--row); vertical-align:top; }
     tbody tr:last-child td { border-bottom:none; }
+
+    /* Links */
     a { color:var(--link); text-decoration:none; border-bottom:1px dashed rgba(137,199,255,.35); }
     a:hover { text-decoration:underline; }
 
+    /* Status badges */
     .badge { display:inline-block; padding:3px 10px; border-radius:999px; font-weight:600; font-size:12px; letter-spacing:.1px; }
     .badge.ok      { background:rgba(22,163,74,.18);  color:#c7f8d8; border:1px solid rgba(22,163,74,.35); }
     .badge.warn    { background:rgba(245,158,11,.18); color:#fde68a; border:1px solid rgba(245,158,11,.35); }
     .badge.bad     { background:rgba(239,68,68,.18);  color:#fecaca; border:1px solid rgba(239,68,68,.35); }
     .badge.unknown { background:rgba(148,163,184,.18);color:#e2e8f0; border:1px solid rgba(148,163,184,.35); }
 
+    /* Divider between table and contact card */
     .section-divider { height:1px; background:var(--row); margin:16px 0; border-radius:1px; }
 
-    /* Contact card (streamlined) */
+    /* Contact Service Management – styled like table */
     .contact-card{
       background:var(--card); color:var(--fg);
       border:1px solid var(--border); border-radius:12px;
@@ -64,6 +70,7 @@
   <h2>Markel Services</h2>
   <p class="meta">Auto-refresh: 60s • Last updated: <span id="lastUpdated">—</span></p>
 
+  <!-- Table rendered from status.json -->
   <table id="statusTable" aria-live="polite">
     <thead>
       <tr>
@@ -110,7 +117,7 @@
       </ul>
 
       <p class="muted">Please note Service Management email is not monitored</p>
-      <p>Web: <a class="sn-link" href="https://markel.service-now.com/sp" target="_blank" rel="noopener noreferrer"></a></p>
+      <p>Web: <a class="sn-link" href="https://markel.service-now.com/sp" target="_blank" rel="noopener noreferrer">https://markel.service-now.com/sp</a></p>
     </div>
   </section>
 
@@ -130,7 +137,7 @@
       return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
     }
 
-    // ✅ Correct <a> generator
+    // ✅ Correct hyperlink generator
     function linkHTML(url, text){
       if(!url) return '';
       const href = String(url);
@@ -147,6 +154,7 @@
       const desc = svc.description || (svc.status === 'Operational' ? 'All systems operational' : 'Status unknown');
       const src = svc.source || '';
       const srcText = readableSource(src, svc.name);
+
       return `
         <tr>
           <td>${escapeHtml(svc.name || '')}</td>
@@ -162,6 +170,7 @@
       const data = await res.json();
       const list = Array.isArray(data.services) ? data.services.slice() : [];
 
+      // Sort: Major -> Minor -> Operational -> Unknown, then A–Z
       list.sort((a,b) =>
         (severityOrder[a.status] - severityOrder[b.status]) ||
         (a.name || '').localeCompare(b.name || '')
