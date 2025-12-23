@@ -1,121 +1,189 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Status Dashboard – Markel Services</title>
-<style>
-  body { background:#0f172a; color:#e2e8f0; font-family: system-ui, sans-serif; margin:0; }
-  .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-  h1 { font-size: 1.6rem; margin: 0 0 .25rem 0; }
-  .meta { color:#94a3b8; margin-bottom: 1rem; }
-  table { width:100%; border-collapse: collapse; background:#111827; border-radius:12px; overflow:hidden; table-layout: fixed; }
-  th, td { padding: .9rem; border-bottom: 1px solid #1f2937; vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; }
-  th { text-align:left; color:#93c5fd; background:#0b1220; position: sticky; top:0; }
-  tr:last-child td { border-bottom:none; }
-  .badge { display:inline-block; padding:.2rem .6rem; border-radius:999px; font-size:.85rem; font-weight:600; }
-  .Operational { background:#16a34a; color:#ffffff; } /* Green for operational */
-  .Minor { background:#b45309; color:#fff7ed; }
-  .Major, .Critical { background:#b91c1c; color:#fee2e2; }
-  .Unknown { background:#475569; color:#e2e8f0; }
-  a { color:#93c5fd; text-decoration:none; word-break: break-all; }
-  a:hover { text-decoration:underline; }
-  .error { color:#fca5a5; font-size:.9rem; }
-</style>
+  <meta charset="utf-8">
+  <title>Status Dashboard – Markel Services</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    /* Minimal styling so the contact section looks good on a dark theme.
+       If you already have a site CSS, you can remove this style block
+       and copy the .contact-* rules into your stylesheet. */
+
+    body { background:#0b1220; color:#e6eefc; font:14px/1.5 system-ui, Segoe UI, Roboto, Arial, sans-serif; margin:24px; }
+    h1, h2 { margin: 0 0 10px; }
+    .meta { color:#9aa6bd; margin: 6px 0 16px; }
+    table { width:100%; border-collapse: collapse; background:#0f172a; border-radius: 12px; overflow: hidden; }
+    th, td { padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.06); text-align:left; }
+    thead th { color:#9aa6bd; }
+    a { color:#89c7ff; text-decoration: none; border-bottom: 1px dashed rgba(137,199,255,.35); }
+    a:hover { text-decoration: underline; }
+
+    /* Contact Service Management card */
+    .contact-card{
+      display:flex; gap:14px; align-items:flex-start;
+      background:#0f172a; color:#e6eefc;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; padding:14px 16px; margin-top:18px;
+    }
+    .contact-icon{ flex:0 0 auto; line-height:0; }
+    .contact-body h2{ font-size:16px; margin:2px 0 8px; }
+    .contact-list{ list-style:none; padding:0; margin:0 0 8px; }
+    .contact-list li{ margin:6px 0; }
+    .contact-list strong{ color:#e6eefc; }
+    .contact-card .dial-note{ color:#ff8a75; }
+    .contact-card .muted{ color:#9aa6bd; margin-top:8px; }
+    .sn-link{ color:#89c7ff; }
+    @media (max-width: 560px){
+      .contact-card{ flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Markel Services</h1>
-    <div class="meta">Auto-refresh: <span id="refresh-interval">60s</span> • Last updated: <span id="last-updated">—</span></div>
 
-    <table aria-label="Service status">
-      <thead>
-        <tr>
-          <th>Service</th>
-          <th>Status</th>
-          <th>Description</th>
-          <th>Source</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr id="Azure"><td>Azure</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">Azure Status</td><td><a href="https://azure.status.microsoft/en-us/status" target="_blank">Azure</a></td></tr>
-        <tr id="Azure_DevOps"><td>Azure DevOps</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">Everything is looking good</td><td><a href="https://status.dev.azure.com/" target="_blank">Azure DevOps</a></td></tr>
-        <tr id="Azure_Databricks"><td>Azure Databricks</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.azuredatabricks.net/" target="_blank">Azure Databricks</a></td></tr>
-        <tr id="JFrog"><td>JFrog</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.jfrog.io/" target="_blank">JFrog</a></td></tr>
-        <tr id="Elastic"><td>Elastic</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.elastic.co/" target="_blank">Elastic</a></td></tr>
-        <tr id="Octopus_Deploy"><td>Octopus Deploy</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.octopus.com/" target="_blank">Octopus Deploy</a></td></tr>
-        <tr id="Lucid"><td>Lucid</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.lucid.co/" target="_blank">Lucid</a></td></tr>
-        <tr id="Jira"><td>Jira</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://jira-software.status.atlassian.com/" target="_blank">Jira</a></td></tr>
-        <tr id="Confluence"><td>Confluence</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://confluence.status.atlassian.com/" target="_blank">Confluence</a></td></tr>
-        <tr id="GitHub"><td>GitHub</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://www.githubstatus.com/" target="_blank">GitHub</a></td></tr>
-        <tr id="CucumberStudio"><td>CucumberStudio</td><td class="status"><span class="badge Unknown">Unknown</span></td><td class="description">Unknown</td><td><a href="https://status.cucumberstudio.com/" target="_blank">CucumberStudio</a></td></tr>
-        <tr id="Fivetran"><td>Fivetran</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.fivetran.com/" target="_blank">Fivetran</a></td></tr>
-        <tr id="Brainboard"><td>Brainboard</td><td class="status"><span class="badge Minor">Minor</span></td><td class="description">Maintenance</td><td><a href="https://status.brainboard.co/" target="_blank">Brainboard</a></td></tr>
-        <tr id="Port"><td>Port</td><td class="status"><span class="badge Operational">Operational</span></td><td class="description">All systems operational</td><td><a href="https://status.port.io/" target="_blank">Port</a></td></tr>
-      </tbody>
-    </table>
-    <p id="error" class="error" style="display:none;"></p>
-  </div>
+  <h1>Status Dashboard – Markel Services</h1>
+  <h2>Markel Services</h2>
 
-<script>
-const STATUS_JSON_URL = 'status.json?v=' + Date.now();
-const REFRESH_MS = 60000;
+  <p class="meta">Auto-refresh: 60s • Last updated: —</p>
 
-function formatDate(dt) {
-  const pad = (n) => String(n).padStart(2, '0');
-  return `${dt.getFullYear()}-${pad(dt.getMonth()+1)}-${pad(dt.getDate())} ${pad(dt.getHours())}:${pad(dt.getMinutes())}:${pad(dt.getSeconds())}`;
-}
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Status</th>
+        <th>Description</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Azure</td>
+        <td>Operational</td>
+        <td>Azure Status</td>
+        <td><a href="https://azure.status.microsoft/en-us/status" target="_blank" rel="noopener">Azure</a></td>
+      </tr>
+      <tr>
+        <td>Azure DevOps</td>
+        <td>Operational</td>
+        <td>Everything is looking good</td>
+        <td><a href="https://status.dev.azure.com/" target="_blank" rel="noopener">Azure DevOps</a></td>
+      </tr>
+      <tr>
+        <td>Azure Databricks</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://status.azuredatabricks.net/" target="_blank" rel="noopener">Azure Databricks</a></td>
+      </tr>
+      <tr>
+        <td>JFrog</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://status.jfrog.io/" target="_blank" rel="noopener">JFrog</a></td>
+      </tr>
+      <tr>
+        <td>Elastic</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://status.elastic.co/" target="_blank" rel="noopener">Elastic</a></td>
+      </tr>
+      <tr>
+        <td>Octopus Deploy</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://status.octopus.com/" target="_blank" rel="noopener">Octopus Deploy</a></td>
+      </tr>
+      <tr>
+        <td>Lucid</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://status.lucid.co/" target="_blank" rel="noopener">Lucid</a></td>
+      </tr>
+      <tr>
+        <td>Jira</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://jira-software.status.atlassian.com/" target="_blank" rel="noopener">Jira</a></td>
+      </tr>
+      <tr>
+        <td>Confluence</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://confluence.status.atlassian.com/" target="_blank" rel="noopener">Confluence</a></td>
+      </tr>
+      <tr>
+        <td>GitHub</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://www.githubstatus.com/" target="_blank" rel="noopener">GitHub</a></td>
+      </tr>
+      <tr>
+        <td>CucumberStudio</td>
+        <td>Unknown</td>
+        <td>Unknown</td>
+        <td><a href="https://status.cucumberstudio.com/" target="_blank" rel="noopener">CucumberStudio</a></td>
+      </tr>
+      <tr>
+        <td>Fivetran</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://status.fivetran.com/" target="_blank" rel="noopener">Fivetran</a></td>
+      </tr>
+      <tr>
+        <td>Brainboard</td>
+        <td>Minor</td>
+        <td>Maintenance</td>
+        <td><a href="https://status.brainboard.co/" target="_blank" rel="noopener">Brainboard</a></td>
+      </tr>
+      <tr>
+        <td>Port</td>
+        <td>Operational</td>
+        <td>All systems operational</td>
+        <td><a href="https://status.port.io/" target="_blank" rel="noopener">Port</a></td>
+      </tr>
+    </tbody>
+  </table>
 
-function setLastUpdated(now = new Date()) {
-  document.getElementById('last-updated').textContent = formatDate(now);
-}
+  <!-- Contact Service Management -->
+  <section id="contact-sm" class="contact-card" aria-labelledby="csm-title">
+    <div class="contact-icon" aria-hidden="true">
+      <!-- Phone glyph in a red circle -->
+      <svg viewBox="0 0 24 24" width="28" height="28" role="img" focusable="false">
+        <circle cx="12" cy="12" r="12" fill="#e24a3b"></circle>
+        <path d="M16.54 15.3l-1.28 1.28a2 2 0 0 1-2.23.43c-1.2-.5-2.8-1.7-4.19-3.09S6.25 11.1 5.76 9.9a2 2 0 0 1 .43-2.23L7.47 6.4a.8.8 0 0 1 1.15.07l1.2 1.48a1 1 0 0 1-.1 1.35l-.7.7c.47.87 1.26 1.86 2.24 2.84s1.97 1.77 2.84 2.24l.7-.7a1 1 0 0 1 1.35-.1l1.48 1.2a.8.8 0 0 1 .07 1.15z"
+              fill="#fff"></path>
+      </svg>
+    </div>
 
-function setError(msg) {
-  const el = document.getElementById('error');
-  el.textContent = msg;
-  el.style.display = msg ? 'block' : 'none';
-}
+    <div class="contact-body">
+      <h2 id="csm-title">Contact Service Management:</h2>
 
-function applyStatusToRow(row, statusText, descriptionText) {
-  const statusCell = row.querySelector('.status');
-  const descCell = row.querySelector('.description');
-  if (descCell) descCell.textContent = descriptionText || '';
-  if (statusCell) {
-    let badge = statusCell.querySelector('.badge');
-    if (!badge) {
-      badge = document.createElement('span');
-      badge.className = 'badge';
-      statusCell.innerHTML = '';
-      statusCell.appendChild(badge);
-    }
-    badge.className = 'badge ' + (statusText || 'Unknown');
-    badge.textContent = statusText || 'Unknown';
-  }
-}
+      <ul class="contact-list">
+        <li>
+          <strong>US and Bermuda:</strong>
+          <a href="tel:+18045273843">+1 804 527 3843</a>
+          <span class="dial-note"> (To dial from UK:
+            <a class="alt-dial" href="tel:+18045273843">001 804 527 3843</a>)
+          </span>
+        </li>
 
-async function refreshStatus() {
-  setError('');
-  try {
-    const resp = await fetch(STATUS_JSON_URL, { cache: 'no-store' });
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    const data = await resp.json();
-    const items = Array.isArray(data.services) ? data.services : [];
-    items.forEach(svc => {
-      const id = (svc.name || '').replace(/\s+/g, '_').replace(/[\/]/g, '_');
-      const row = document.getElementById(id);
-      if (row) applyStatusToRow(row, svc.status, svc.description);
-    });
-    setLastUpdated(new Date());
-  } catch (err) {
-    console.error('Error fetching status:', err);
-    setError('Error fetching status.json. Retrying...');
-  }
-}
+        <li>
+          <strong>Markel International:</strong>
+          <a href="tel:+442079536782">+44 (0)207 953 6782</a>
+          <span class="dial-note"> (To dial from US:
+            <a class="alt-dial" href="tel:+442079536782">011 44 207 953 6782</a>)
+          </span>
+        </li>
+      </ul>
 
-setLastUpdated(new Date());
-refreshStatus();
-setInterval(refreshStatus, REFRESH_MS);
-</script>
+      <p class="muted">Please note Service Management email is not monitored</p>
+      <p>
+        Web:
+        <a class="sn-link" href="https://markel.service-now.com/sp" target="_blank" rel="noopener">
+          https://markel.service-now.com/sp
+        </a>
+      </p>
+    </div>
+  </section>
+
 </body>
 </html>
