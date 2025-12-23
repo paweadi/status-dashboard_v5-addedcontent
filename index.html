@@ -151,7 +151,7 @@
     function rowHTML(svc){
       const { cls, label } = badgeFor(svc.status);
       const desc = svc.description || (svc.status === 'Operational' ? 'All systems operational' : 'Status unknown');
-      const src = svc.source || '';
+      const src = (svc.source || '').trim();
       const srcText = readableSource(src, svc.name);
 
       return `
