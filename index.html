@@ -21,7 +21,6 @@
     thead th { text-align:left; padding:12px 14px; color:var(--muted); border-bottom:1px solid var(--row); }
     tbody td { padding:12px 14px; border-bottom:1px solid var(--row); vertical-align:top; }
     tbody tr:last-child td { border-bottom:none; }
-
     a { color:var(--link); text-decoration:none; border-bottom:1px dashed rgba(137,199,255,.35); }
     a:hover { text-decoration:underline; }
 
@@ -33,6 +32,7 @@
 
     .section-divider { height:1px; background:var(--row); margin:16px 0; border-radius:1px; }
 
+    /* Contact card (streamlined) */
     .contact-card{
       background:var(--card); color:var(--fg);
       border:1px solid var(--border); border-radius:12px;
@@ -61,6 +61,7 @@
 </head>
 <body>
   <h1>Status Dashboard – Markel Services</h1>
+  <h2>Markel Services</h2>
   <p class="meta">Auto-refresh: 60s • Last updated: <span id="lastUpdated">—</span></p>
 
   <table id="statusTable" aria-live="polite">
@@ -93,25 +94,23 @@
       <ul class="contact-list">
         <li>
           <span class="label">US and Bermuda:</span>
-          +1&nbsp;804&nbsp;527&nbsp;3843
-          tel:+18045273843Call</a>
+          <a class="tel" href="tel:+18045273843">+1 804 527 3843</a>
           <span class="dial-note"> (To dial from UK:
-            tel:+18045273843001&nbsp;804&nbsp;527&nbsp;3843</a>)
+            <a class="tel" href="tel:+18045273843">001 804 527 3843</a>)
           </span>
         </li>
 
         <li>
           <span class="label">Markel International:</span>
-          +44&nbsp;(0)207&nbsp;953&nbsp;6782
-          tel:+442079536782Call</a>
+          <a class="tel" href="tel:+442079536782">+44 (0)207 953 6782</a>
           <span class="dial-note"> (To dial from US:
-            tel:+442079536782011&nbsp;44&nbsp;207&nbsp;953&nbsp;6782</a>)
+            <a class="tel" href="tel:+442079536782">011 44 207 953 6782</a>)
           </span>
         </li>
       </ul>
 
       <p class="muted">Please note Service Management email is not monitored</p>
-      <p>Web: https://markel.service-now.com/sphttps://markel.service-now.com/sp</a></p>
+      <p>Web: <a class="sn-link" href="https://markel.service-now.com/sp" target="_blank" rel="noopener noreferrer"></a></p>
     </div>
   </section>
 
@@ -131,12 +130,12 @@
       return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
     }
 
-    // ✅ FIXED: proper anchor tag with href
-    function anchorHTML(url, text){
+    // ✅ Correct <a> generator
+    function linkHTML(url, text){
       if(!url) return '';
-      const safeUrl = String(url);
-      const safeText = escapeHtml(text || url);
-      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeText}</a>`;
+      const href = String(url);
+      const label = escapeHtml(text || url);
+      return `${label}</a>`;
     }
 
     function readableSource(url, fallback) {
@@ -146,13 +145,14 @@
     function rowHTML(svc){
       const { cls, label } = badgeFor(svc.status);
       const desc = svc.description || (svc.status === 'Operational' ? 'All systems operational' : 'Status unknown');
-      const srcText = readableSource(svc.source, svc.name);
+      const src = svc.source || '';
+      const srcText = readableSource(src, svc.name);
       return `
         <tr>
           <td>${escapeHtml(svc.name || '')}</td>
           <td><span class="badge ${cls}">${label}</span></td>
           <td>${escapeHtml(desc)}</td>
-          <td>${anchorHTML(svc.source, srcText)}</td>
+          <td>${linkHTML(src, srcText)}</td>
         </tr>
       `;
     }
