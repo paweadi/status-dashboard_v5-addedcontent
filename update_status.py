@@ -64,7 +64,7 @@ for svc in services:
             else:
                 status = "Operational"
             description = description_from_status(status)
-            updated_services.append({'name': name, 'status': status, 'description': description})
+            updated_services.append({'name': name, 'status': status, 'description': description, 'source': url})
             continue
 
         # API logic for CucumberStudio and Brainboard
@@ -78,7 +78,7 @@ for svc in services:
             else:
                 status = "Operational"
             description = description_from_status(status)
-            updated_services.append({'name': name, 'status': status, 'description': description})
+            updated_services.append({'name': name, 'status': status, 'description': description, 'source': url})
             continue
 
         # HTML scraping for other services
@@ -97,7 +97,7 @@ for svc in services:
         status = "Operational"
         description = description_from_status(status)
 
-    updated_services.append({'name': name, 'status': status, 'description': description})
+    updated_services.append({'name': name, 'status': status, 'description': description, 'source': url})
 
 with open("status.json", "w", encoding="utf-8") as f:
     json.dump({"services": updated_services}, f, indent=4)
