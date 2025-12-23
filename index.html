@@ -139,9 +139,9 @@
     /** ✅ Proper hyperlink generator with href/target/rel */
     function linkHTML(url, text){
       if(!url) return '';
-      const href = String(url);
+      const href = String(url).trim();
       const label = escapeHtml(text || url);
-      return `${label}</a>`;
+      return `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
 
     function readableSource(url, fallback) {
