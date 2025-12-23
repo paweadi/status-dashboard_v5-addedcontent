@@ -3,72 +3,86 @@
         {
             "name": "Azure",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://azure.status.microsoft/en-us/status"
         },
         {
             "name": "Azure DevOps",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.dev.azure.com/"
         },
         {
             "name": "Azure Databricks",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.azuredatabricks.net/"
         },
         {
             "name": "JFrog",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.jfrog.io/"
         },
         {
             "name": "Elastic",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.elastic.co/"
         },
         {
             "name": "Octopus Deploy",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.octopus.com/"
         },
         {
             "name": "Lucid",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.lucid.co/"
         },
         {
             "name": "Jira",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://jira-software.status.atlassian.com/"
         },
         {
             "name": "Confluence",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://confluence.status.atlassian.com/"
         },
         {
             "name": "GitHub",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://www.githubstatus.com/"
         },
         {
             "name": "CucumberStudio",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.cucumberstudio.com/"
         },
         {
             "name": "Fivetran",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.fivetran.com/"
         },
         {
             "name": "Brainboard",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.brainboard.co/"
         },
         {
             "name": "Port",
             "status": "Operational",
-            "description": "All systems operational"
+            "description": "All systems operational",
+            "source": "https://status.port.io/"
         }
     ]
 }
