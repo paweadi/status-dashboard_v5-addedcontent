@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,5 +116,47 @@ setLastUpdated(new Date());
 refreshStatus();
 setInterval(refreshStatus, REFRESH_MS);
 </script>
+<!-- Contact Service Management -->
+  <section id="contact-sm" class="contact-card" aria-labelledby="csm-title">
+    <div class="contact-icon" aria-hidden="true">
+      <!-- Phone glyph in a red circle -->
+      <svg viewBox="0 0 24 24" width="28" height="28" role="img" focusable="false">
+        <circle cx="12" cy="12" r="12" fill="#e24a3b"></circle>
+        <path d="M16.54 15.3l-1.28 1.28a2 2 0 0 1-2.23.43c-1.2-.5-2.8-1.7-4.19-3.09S6.25 11.1 5.76 9.9a2 2 0 0 1 .43-2.23L7.47 6.4a.8.8 0 0 1 1.15.07l1.2 1.48a1 1 0 0 1-.1 1.35l-.7.7c.47.87 1.26 1.86 2.24 2.84s1.97 1.77 2.84 2.24l.7-.7a1 1 0 0 1 1.35-.1l1.48 1.2a.8.8 0 0 1 .07 1.15z"
+              fill="#fff"></path>
+      </svg>
+    </div>
+
+    <div class="contact-body">
+      <h2 id="csm-title">Contact Service Management:</h2>
+
+      <ul class="contact-list">
+        <li>
+          <strong>US and Bermuda:</strong>
+          <a href="tel:+18045273843">+1 804 527 3843</a>
+          <span class="dial-note"> (To dial from UK:
+            <a class="alt-dial" href="tel:+18045273843">001 804 527 3843</a>)
+          </span>
+        </li>
+
+        <li>
+          <strong>Markel International:</strong>
+          <a href="tel:+442079536782">+44 (0)207 953 6782</a>
+          <span class="dial-note"> (To dial from US:
+            <a class="alt-dial" href="tel:+442079536782">011 44 207 953 6782</a>)
+          </span>
+        </li>
+      </ul>
+
+      <p class="muted">Please note Service Management email is not monitored</p>
+      <p>
+        Web:
+        <a class="sn-link" href="https://markel.service-now.com/sp" target="_blank" rel="noopener">
+          https://markel.service-now.com/sp
+        </a>
+      </p>
+    </div>
+  </section>
+
 </body>
 </html>
