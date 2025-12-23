@@ -138,6 +138,7 @@
 
   <script>
     const REFRESH_MS = 60000;
+    const STATUS_JSON_URL = 'status.json?v=' + Date.now();
     const severityOrder = { Major: 0, Minor: 1, Operational: 2, Unknown: 3 };
 
     function badgeFor(status) {
