@@ -136,7 +136,7 @@
       return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
     }
 
-    /** ✅ Proper hyperlink generator with href/target/rel */
+    /** Proper hyperlink generator with href/target/rel */
     function linkHTML(url, text){
       if(!url) return '';
       const href = String(url).trim();
