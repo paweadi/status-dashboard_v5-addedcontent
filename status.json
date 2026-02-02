@@ -80,7 +80,7 @@
         },
         {
             "name": "Port",
-            "status": "Minor",
+            "status": "Major",
             "description": "Maintenance",
             "source": "https://status.port.io/"
         }
