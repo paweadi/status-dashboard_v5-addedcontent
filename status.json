@@ -26,14 +26,14 @@
         },
         {
             "name": "Elastic",
-            "status": "Operational",
-            "description": "All systems operational",
+            "status": "Unknown",
+            "description": "Status unknown",
             "source": "https://status.elastic.co/"
         },
         {
             "name": "Octopus Deploy",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.octopus.com/"
         },
         {
