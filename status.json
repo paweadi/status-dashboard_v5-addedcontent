@@ -14,8 +14,8 @@
         },
         {
             "name": "Azure Databricks",
-            "status": "Minor",
-            "description": "Maintenance",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.azuredatabricks.net/"
         },
         {
