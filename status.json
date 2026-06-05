@@ -14,50 +14,50 @@
         },
         {
             "name": "Azure Databricks",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.azuredatabricks.net/"
         },
         {
             "name": "JFrog",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.jfrog.io/"
         },
         {
             "name": "Elastic",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.elastic.co/"
         },
         {
             "name": "Octopus Deploy",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.octopus.com/"
         },
         {
             "name": "Lucid",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.lucid.co/"
         },
         {
             "name": "Jira",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://jira-software.status.atlassian.com/"
         },
         {
             "name": "Confluence",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://confluence.status.atlassian.com/"
         },
         {
             "name": "GitHub",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://www.githubstatus.com/"
         },
         {
@@ -68,8 +68,8 @@
         },
         {
             "name": "Fivetran",
-            "status": "Operational",
-            "description": "All systems operational",
+            "status": "Minor",
+            "description": "Maintenance",
             "source": "https://status.fivetran.com/"
         },
         {
