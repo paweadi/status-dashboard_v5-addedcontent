@@ -20,8 +20,8 @@
         },
         {
             "name": "JFrog",
-            "status": "Unknown",
-            "description": "Status unknown",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.jfrog.io/"
         },
         {
