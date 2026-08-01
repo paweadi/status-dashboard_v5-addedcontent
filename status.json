@@ -68,8 +68,8 @@
         },
         {
             "name": "Fivetran",
-            "status": "Minor",
-            "description": "Maintenance",
+            "status": "Operational",
+            "description": "All systems operational",
             "source": "https://status.fivetran.com/"
         },
         {
