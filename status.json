@@ -80,8 +80,8 @@
         },
         {
             "name": "Port",
-            "status": "Operational",
-            "description": "All systems operational",
+            "status": "Minor",
+            "description": "Maintenance",
             "source": "https://status.port.io/"
         }
     ]
